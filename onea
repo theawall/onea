@@ -153,7 +153,6 @@ test(11).
 % Add testing for set membership to they ssytem
 % Hint: extend the "b4" clauses
 
-test(14).
 test(15).
 
 % 4444444444444444444444444444444444444444444444444444444444
@@ -190,9 +189,13 @@ had(X or Y)       :- had(X); had(Y). %had(X or Y) is true only if had(X) or had(
 had(not X)        :- had(\+ X).      %had(not X) is true only if had(not X) is true.
 had(X =Id had Y)  :- fact(X,Id,Fs),  b4(Y,Fs). %X = Id had Y is true only if fact(X, Id, Fs)
                                      % (from lines 12-16) and b4(Y, Fs) (Fs is a list that contains Y)
+                                     
+had(X=Id had Y had Z in L) :-            %if you are calling had with this format, this is true if
+  fact(X,Id,Fs), b4(Y,Fs), in(Z, L, Fs). %fact(X,Id, Fs) where Fs is the list associated
+                                         % with the person of the given id
 
-b4(X had Y in L, Fs) :- b4(X,Fs), b4(in(Y, L, Fs)).
-  
+                                     
+b4(X had Y in L, Fs) :- b4(X,Fs), in(Y, L, Fs).
 b4(X had Y,Fs)    :- b4(X,Fs), b4(Y,Fs).
 b4(X =  Y, Fs)    :- member(X=Y,Fs).
 
