@@ -196,6 +196,8 @@ had(X=Id had Y had Z in L) :-            %if you are calling had with this forma
 
                                      
 b4(X had Y in L, Fs) :- b4(X,Fs), in(Y, L, Fs).
+b4(X =< Y, Fs)    :- member(X=Z, Fs), Z =< Y.
+b4(X > Y, Fs)     :- member(X=Z, Fs), Z > Y.
 b4(X had Y,Fs)    :- b4(X,Fs), b4(Y,Fs).
 b4(X =  Y, Fs)    :- member(X=Y,Fs).
 
